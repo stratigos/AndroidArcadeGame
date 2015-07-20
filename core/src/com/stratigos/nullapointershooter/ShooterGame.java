@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class ShooterGame extends ApplicationAdapter {
@@ -23,6 +24,12 @@ public class ShooterGame extends ApplicationAdapter {
 	 *  Expects assignment of an image which is 800w x 480h, and kind of looks like outer space.
 	 */
 	private Texture background;
+
+	/**
+	 * A property to hold the spaceship image.
+	 *  Expects assignment of an image which is 120w x 120h, and looks like a badass space fighter ship.
+	 */
+	private Sprite spaceshipSprite;
 	
 	@Override
 	public void create () {
@@ -41,6 +48,10 @@ public class ShooterGame extends ApplicationAdapter {
 
 		// Create background.
 		background = new Texture(Gdx.files.internal("spacebackground.png"));
+
+		// Create the spaceship.
+		Texture spaceshipTexture = new Texture(Gdx.files.internal("spaceship.png"));
+		spaceshipSprite          = new Sprite(spaceshipTexture);
 	}
 
 	@Override
@@ -59,7 +70,11 @@ public class ShooterGame extends ApplicationAdapter {
 		// Start drawing screen.
 		batch.begin();
 
+		// Draw background.
 		batch.draw(background, 0, 0);
+
+		// Draw spaceship Sprite.
+		spaceshipSprite.draw(batch);
 
 		// End drawing screen.
 		batch.end();
