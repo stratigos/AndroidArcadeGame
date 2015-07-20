@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class ShooterGame extends ApplicationAdapter {
@@ -16,6 +17,12 @@ public class ShooterGame extends ApplicationAdapter {
 	 * Used to draw sprites.
 	 */
 	SpriteBatch batch;
+
+	/**
+	 * A property to hold the background image of outer space.
+	 *  Expects assignment of an image which is 800w x 480h, and kind of looks like outer space.
+	 */
+	private Texture background;
 	
 	@Override
 	public void create () {
@@ -31,6 +38,9 @@ public class ShooterGame extends ApplicationAdapter {
 
 		// Initialise SpriteBatch.
 		batch = new SpriteBatch();
+
+		// Create background.
+		background = new Texture(Gdx.files.internal("spacebackground.png"));
 	}
 
 	@Override
@@ -46,7 +56,12 @@ public class ShooterGame extends ApplicationAdapter {
 		// Set projection.
 		batch.setProjectionMatrix(camera.combined);
 
+		// Start drawing screen.
 		batch.begin();
+
+		batch.draw(background, 0, 0);
+
+		// End drawing screen.
 		batch.end();
 	}
 }
