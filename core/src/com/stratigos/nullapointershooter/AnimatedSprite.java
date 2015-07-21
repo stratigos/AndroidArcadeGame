@@ -67,7 +67,7 @@ public class AnimatedSprite {
         // Create "table" to store animated frames.
         int index = 0;
         for (int i = 0; i < FRAMES_ROW; i++) {
-           for (int j = 0; i < FRAMES_COL; j++) {
+           for (int j = 0; j < FRAMES_COL; j++) {
                frames[index++] = temp[i][j];
            }
         }

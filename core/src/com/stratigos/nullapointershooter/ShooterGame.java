@@ -30,6 +30,11 @@ public class ShooterGame extends ApplicationAdapter {
 	 *  Expects assignment of an image which is 120w x 120h, and looks like a badass space fighter ship.
 	 */
 	private Sprite spaceshipSprite;
+
+    /**
+     * Sprite for spaceship animations.
+     */
+    private AnimatedSprite spaceshipAnimated;
 	
 	@Override
 	public void create () {
@@ -50,9 +55,12 @@ public class ShooterGame extends ApplicationAdapter {
 		background = new Texture(Gdx.files.internal("spacebackground.png"));
 
 		// Create the spaceship.
-		Texture spaceshipTexture = new Texture(Gdx.files.internal("spaceship.png"));
+		Texture spaceshipTexture = new Texture(Gdx.files.internal("spaceshipspritemap.png"));
 		spaceshipSprite          = new Sprite(spaceshipTexture);
 		spaceshipSprite.setPosition( ((800 / 2) - spaceshipSprite.getWidth() / 2), 0); // Dynamically center the Sprite.
+
+        // Create animated spaceship.
+        spaceshipAnimated = new AnimatedSprite(spaceshipSprite);
 	}
 
 	@Override
@@ -75,7 +83,7 @@ public class ShooterGame extends ApplicationAdapter {
 		batch.draw(background, 0, 0);
 
 		// Draw spaceship Sprite.
-		spaceshipSprite.draw(batch);
+        spaceshipAnimated.draw(batch);
 
 		// End drawing screen.
 		batch.end();
