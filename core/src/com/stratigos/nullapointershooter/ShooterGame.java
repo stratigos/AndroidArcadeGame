@@ -52,6 +52,7 @@ public class ShooterGame extends ApplicationAdapter {
 		// Create the spaceship.
 		Texture spaceshipTexture = new Texture(Gdx.files.internal("spaceship.png"));
 		spaceshipSprite          = new Sprite(spaceshipTexture);
+		spaceshipSprite.setPosition( ((800 / 2) - spaceshipSprite.getWidth() / 2), 0); // Dynamically center the Sprite.
 	}
 
 	@Override
