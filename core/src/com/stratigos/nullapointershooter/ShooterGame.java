@@ -32,7 +32,8 @@ public class ShooterGame extends ApplicationAdapter {
 	private Sprite spaceshipSprite;
 
     /**
-     * Sprite for spaceship animations.
+     * Sprite for spaceship animations. Expects assignment of animation frames image which is 240w x 240h, and looks
+     *  like a badass space fighter ship.
      */
     private AnimatedSprite spaceshipAnimated;
 	
@@ -57,10 +58,10 @@ public class ShooterGame extends ApplicationAdapter {
 		// Create the spaceship.
 		Texture spaceshipTexture = new Texture(Gdx.files.internal("spaceshipspritemap.png"));
 		spaceshipSprite          = new Sprite(spaceshipTexture);
-		spaceshipSprite.setPosition( ((800 / 2) - spaceshipSprite.getWidth() / 2), 0); // Dynamically center the Sprite.
 
         // Create animated spaceship.
         spaceshipAnimated = new AnimatedSprite(spaceshipSprite);
+        spaceshipAnimated.setPosition((800 / 2), 0);
 	}
 
 	@Override

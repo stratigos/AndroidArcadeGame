@@ -78,7 +78,7 @@ public class AnimatedSprite {
 
     /**
      * Draw current frame at Sprite's X and Y coordinates.
-     * @param spriteBatch
+     * @param spriteBatch SpriteBatch
      */
     public void draw(SpriteBatch spriteBatch)
     {
@@ -86,5 +86,16 @@ public class AnimatedSprite {
         currentFrame = animation.getKeyFrame(stateTime, true);
 
         spriteBatch.draw(currentFrame, sprite.getX(), sprite.getY());
+    }
+
+    /**
+     * Handles position of the current frame on the screen.
+     * @param x float Center of the Sprite
+     * @param y float Bottom of Sprite
+     */
+    public void setPosition(float x, float y)
+    {
+        float widthOffset = sprite.getWidth() / FRAMES_COL;
+        sprite.setPosition((x - widthOffset / 2), y);
     }
 }
