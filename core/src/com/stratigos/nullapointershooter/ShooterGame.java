@@ -95,11 +95,20 @@ public class ShooterGame extends ApplicationAdapter
 
 		// Check for touch input.
 		if (Gdx.input.isTouched()) {
+			// The ship only moves left or right, not up or down, and has a predefined velocity, so its only necessary
+			//  to know if it was the X input was manipulated.
 			int xTouch = Gdx.input.getX();
-			int yTouch = Gdx.input.getY();
 
-			// Print coordinates to output log.
-			System.out.println(xTouch + ":" + yTouch);
+			// If the position of the X touch input is beyond the spaceship's X position, then the ship should move
+			//  to the right. Otherwise, it should move to the left.
+			if (xTouch > spaceshipAnimated.getX()) {
+				spaceshipAnimated.moveRight();
+			} else {
+				spaceshipAnimated.moveLeft();
+			}
+
+
+
 		}
 	}
 }
