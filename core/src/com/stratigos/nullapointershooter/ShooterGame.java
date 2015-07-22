@@ -88,5 +88,14 @@ public class ShooterGame extends ApplicationAdapter {
 
 		// End drawing screen.
 		batch.end();
+
+		// Check for touch input.
+		if (Gdx.input.isTouched()) {
+			int xTouch = Gdx.input.getX();
+			int yTouch = Gdx.input.getY();
+
+			// Print coordinates to output log.
+			System.out.println(xTouch + ":" + yTouch);
+		}
 	}
 }
