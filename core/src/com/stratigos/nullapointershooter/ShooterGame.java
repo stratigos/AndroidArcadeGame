@@ -8,7 +8,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class ShooterGame extends ApplicationAdapter {
+public class ShooterGame extends ApplicationAdapter
+{
 	/**
 	 * A camera (viewpoint / perspective?).
 	 */
@@ -38,7 +39,8 @@ public class ShooterGame extends ApplicationAdapter {
     private AnimatedSprite spaceshipAnimated;
 	
 	@Override
-	public void create () {
+	public void create ()
+	{
 		// The following function "setEnforcePotImages(false);" is no longer available, as the corresponding tutorial
 		//  for this program is very out of date. See the following SO link:
 		//  http://stackoverflow.com/questions/29398237/texture-setenforcepotimagesfalse-cannot-resolve-mothed-error-under-android-st
@@ -65,12 +67,14 @@ public class ShooterGame extends ApplicationAdapter {
 	}
 
 	@Override
-	public void dispose() {
+	public void dispose()
+	{
 		batch.dispose();
 	}
 
 	@Override
-	public void render () {
+	public void render ()
+	{
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
