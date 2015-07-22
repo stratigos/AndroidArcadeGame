@@ -106,9 +106,6 @@ public class ShooterGame extends ApplicationAdapter
 			} else {
 				spaceshipAnimated.moveLeft();
 			}
-
-
-
 		}
 	}
 }

@@ -15,22 +15,22 @@ import com.badlogic.gdx.math.Vector2;
 public class AnimatedSprite {
 
     /**
-     * Rate of movement, in pixels, the sprite moves per game tick.
+     * Rate of movement, in pixels, the Sprite moves per game tick.
      */
     public static final int SHIP_SPEED = 300;
 
     /**
-     * Stored value to represent number of horizontal animation tiles in a sprite map.
+     * Stored value to represent number of horizontal animation tiles in a Sprite map.
      */
     private static final int FRAMES_COL = 2;
 
     /**
-     * Stored value to represent number of vertical animation tiles in a sprite map.
+     * Stored value to represent number of vertical animation tiles in a Sprite map.
      */
     private static final int FRAMES_ROW = 2;
 
     /**
-     * Represents the current sprite being animated.
+     * Represents the current Sprite being animated.
      */
     private Sprite sprite;
 
@@ -69,7 +69,7 @@ public class AnimatedSprite {
         Texture texture        = sprite.getTexture();
         TextureRegion[][] temp = TextureRegion.split(
             texture,
-            texture.getWidth() / FRAMES_COL,
+            (int) getSpriteWidth(),
             texture.getHeight() / FRAMES_ROW
         );
         frames = new TextureRegion[FRAMES_COL * FRAMES_ROW];
@@ -87,7 +87,7 @@ public class AnimatedSprite {
     }
 
     /**
-     * Draw current frame at sprite's X and Y coordinates.
+     * Draw current frame at Sprite's X and Y coordinates.
      * @param spriteBatch SpriteBatch
      */
     public void draw(SpriteBatch spriteBatch)
@@ -100,17 +100,16 @@ public class AnimatedSprite {
 
     /**
      * Handles position of the current frame on the screen.
-     * @param x float Center of the sprite
-     * @param y float Bottom of sprite
+     * @param x float Center of the Sprite
+     * @param y float Bottom of Sprite
      */
     public void setPosition(float x, float y)
     {
-        float widthOffset = sprite.getWidth() / FRAMES_COL;
-        sprite.setPosition((x - widthOffset / 2), y);
+        sprite.setPosition((x - getSpriteCenterOffset()), y);
     }
 
     /**
-     * Controls the right-directional velocity of the sprite. Moves at 300px / frame,
+     * Controls the right-directional velocity of the Sprite. Moves at 300px / frame,
      */
     public void moveRight()
     {
@@ -118,7 +117,7 @@ public class AnimatedSprite {
     }
 
     /**
-     * Controls the left-directional velocity of the sprite. Moves at 300px / frame,
+     * Controls the left-directional velocity of the Sprite. Moves at 300px / frame,
      */
     public void moveLeft()
     {
@@ -126,10 +125,29 @@ public class AnimatedSprite {
     }
 
     /**
-     * Get the X position of the center of the sprite.
-     * @return Pixel x-position of center of the sprite.
+     * Get the X position of the center of the Sprite.
+     * @return Pixel x-position of center of the Sprite.
      */
     public int getX() {
-        return 0;
+
+        return (int) (sprite.getX() + getSpriteCenterOffset());
+    }
+
+    /**
+     * Find the distance between the edge of the Sprite and it's center.
+     * @return Distance in pixels from Sprite center pixel.
+     */
+    private float getSpriteCenterOffset()
+    {
+        return getSpriteWidth() / 2;
+    }
+
+    /**
+     * Finds the width of an individual frame of the spritemap.
+     * @return Width of the Sprite.
+     */
+    private float getSpriteWidth()
+    {
+        return sprite.getWidth() / FRAMES_COL;
     }
 }
