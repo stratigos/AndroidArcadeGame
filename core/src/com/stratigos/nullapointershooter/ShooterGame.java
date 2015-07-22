@@ -94,6 +94,15 @@ public class ShooterGame extends ApplicationAdapter
 		batch.end();
 
 		// Check for touch input.
+		handleInput();
+
+		spaceshipAnimated.move();
+	}
+
+	/**
+	 * Check if screen is touched, and if ship should move to the left or right.
+	 */
+	private void handleInput() {
 		if (Gdx.input.isTouched()) {
 			// The ship only moves left or right, not up or down, and has a predefined velocity, so its only necessary
 			//  to know if it was the X input was manipulated.

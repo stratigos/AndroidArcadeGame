@@ -125,6 +125,19 @@ public class AnimatedSprite {
     }
 
     /**
+     * Move the ship to the left or right based on current velocity.
+     */
+    public void move()
+    {
+        // Determine how many pixels the ship should move in the X axis based on time passed.
+        int xMovement = (int) (velocity.x * Gdx.graphics.getDeltaTime());
+
+        // Set new position of ship based on changed velocity. Note that the ship does not move forward or backward, so
+        //  the Y-position always stays at 0.
+        sprite.setPosition(sprite.getX() + xMovement, 0);
+    }
+
+    /**
      * Get the X position of the center of the Sprite.
      * @return Pixel x-position of center of the Sprite.
      */
@@ -146,8 +159,7 @@ public class AnimatedSprite {
      * Finds the width of an individual frame of the spritemap.
      * @return Width of the Sprite.
      */
-    private float getSpriteWidth()
-    {
+    private float getSpriteWidth() {
         return sprite.getWidth() / FRAMES_COL;
     }
 }
