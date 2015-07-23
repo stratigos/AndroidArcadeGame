@@ -125,7 +125,7 @@ public class AnimatedSprite {
     }
 
     /**
-     * Move the ship to the left or right based on current velocity.
+     * Moves the ship to the left or right based on current velocity. Prevents Sprite from moving off the screen.
      */
     public void move()
     {
@@ -135,6 +135,18 @@ public class AnimatedSprite {
         // Set new position of ship based on changed velocity. Note that the ship does not move forward or backward, so
         //  the Y-position always stays at 0.
         sprite.setPosition(sprite.getX() + xMovement, 0);
+
+        // Prevent Sprite from moving off the screen.
+        if (sprite.getX() < 0) {
+            sprite.setX(0);
+            velocity.x = 0; // Stop moving the Sprite altogether when it hits the edge.
+        }
+        if ((sprite.getX() + getSpriteWidth()) > 800) {
+            sprite.setX(800 - getSpriteWidth());
+            velocity.x = 0;
+        }
+
+
     }
 
     /**
