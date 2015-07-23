@@ -11,6 +11,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class ShooterGame extends ApplicationAdapter
 {
 	/**
+	 * Stores values which represent dimensions of the screen / viewport.
+	 */
+	public static final int SCREEN_WIDTH  = 800;
+	public static final int SCREEN_HEIGHT = 480;
+
+	/**
 	 * A camera (viewpoint / perspective?).
 	 */
 	private OrthographicCamera camera;
@@ -49,7 +55,7 @@ public class ShooterGame extends ApplicationAdapter
 
 		// Initialize viewpoint and resolution.
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false, 800, 480); // Sets resolution.
+		camera.setToOrtho(false, SCREEN_WIDTH, SCREEN_HEIGHT); // Sets resolution.
 
 		// Initialise SpriteBatch.
 		batch = new SpriteBatch();
@@ -63,7 +69,7 @@ public class ShooterGame extends ApplicationAdapter
 
         // Create animated spaceship.
         spaceshipAnimated = new AnimatedSprite(spaceshipSprite);
-        spaceshipAnimated.setPosition((800 / 2), 0);
+        spaceshipAnimated.setPosition((SCREEN_WIDTH / 2), 0);
 	}
 
 	@Override

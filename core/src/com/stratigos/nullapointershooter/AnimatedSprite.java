@@ -141,8 +141,8 @@ public class AnimatedSprite {
             sprite.setX(0);
             velocity.x = 0; // Stop moving the Sprite altogether when it hits the edge.
         }
-        if ((sprite.getX() + getSpriteWidth()) > 800) {
-            sprite.setX(800 - getSpriteWidth());
+        if ((sprite.getX() + getSpriteWidth()) > ShooterGame.SCREEN_WIDTH) {
+            sprite.setX(ShooterGame.SCREEN_WIDTH - getSpriteWidth());
             velocity.x = 0;
         }
 
