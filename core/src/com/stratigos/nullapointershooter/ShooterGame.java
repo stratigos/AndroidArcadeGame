@@ -115,12 +115,14 @@ public class ShooterGame extends ApplicationAdapter
 	}
 
 	/**
-	 * Check if screen is touched, and if ship should move to the left or right.
+	 * Check if screen is touched, and if ship should move to the left or right. Also fires ship's weapons on touch.
+	 * TODO Store shaceshipAnimated.getX() in a local var, and dont call it 2x.
 	 */
-	private void handleInput() {
+	private void handleInput()
+	{
 		if (Gdx.input.isTouched()) {
-			// The ship only moves left or right, not up or down, and has a predefined velocity, so its only necessary
-			//  to know if it was the X input was manipulated.
+			// Handle movement. The ship only moves left or right, not up or down, and has a predefined velocity, so
+			//  its only necessary to know if it was the X input was manipulated.
 			int xTouch = Gdx.input.getX();
 
 			// If the position of the X touch input is beyond the spaceship's X position, then the ship should move
@@ -130,6 +132,9 @@ public class ShooterGame extends ApplicationAdapter
 			} else {
 				spaceshipAnimated.moveLeft();
 			}
+
+			// Handle firing weapons.
+			shotManager.firePlayerShot(spaceshipAnimated.getX());
 		}
 	}
 }

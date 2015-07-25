@@ -109,6 +109,15 @@ public class AnimatedSprite
     }
 
     /**
+     * Update the velocity of this Sprite.
+     * @param velocity Vector2 instance used to manipulate Sprite's velocity on screen.
+     */
+    public void setVelocity(Vector2 velocity)
+    {
+        this.velocity = velocity;
+    }
+
+    /**
      * Controls the right-directional velocity of the Sprite. Moves at 300px / frame,
      */
     public void moveRight()
@@ -151,7 +160,8 @@ public class AnimatedSprite
      * Get the X position of the center of the Sprite.
      * @return Pixel x-position of center of the Sprite.
      */
-    public int getX() {
+    public int getX()
+    {
         return (int) (sprite.getX() + getSpriteCenterOffset());
     }
 
@@ -168,7 +178,8 @@ public class AnimatedSprite
      * Finds the width of an individual frame of the spritemap.
      * @return Width of the Sprite.
      */
-    private float getSpriteWidth() {
+    private float getSpriteWidth()
+    {
         return sprite.getWidth() / FRAMES_COL;
     }
 }
