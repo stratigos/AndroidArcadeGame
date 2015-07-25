@@ -76,8 +76,9 @@ public class ShooterGame extends ApplicationAdapter
         spaceshipAnimated = new AnimatedSprite(spaceshipSprite);
         spaceshipAnimated.setPosition((SCREEN_WIDTH / 2), 0);
 
-		// Create ShotManager instance to track/animate shooting.
-		shotManager = new ShotManager();
+		// Create Texture to display shots, and ShotManager instance to track/animate shooting.
+		Texture shotTexture = new Texture(Gdx.files.internal("shotspritemap.png"));
+		shotManager 		= new ShotManager(shotTexture);
 	}
 
 	@Override
