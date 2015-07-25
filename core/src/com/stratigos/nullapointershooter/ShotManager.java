@@ -1,5 +1,6 @@
 package com.stratigos.nullapointershooter;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -18,12 +19,22 @@ public class ShotManager
      * Position of center of Y axis from which the Sprite's weapons begin to appear. Used to determine starting location
      *  of projectile animation.
      */
-    public static final int SHOT_Y_OFFSET = 110;
+    private static final int SHOT_Y_OFFSET = 110;
 
     /**
      * Value to store the velocity of the projectile.
      */
-    public static final int SHOT_SPEED = 300;
+    private static final int SHOT_SPEED = 300;
+
+    /**
+     * Value which represents rate of fire.
+     */
+    private static final float MINIMUM_TIME_BETWEEN_SHOTS = 0.5f;
+
+    /**
+     * Amount of time which has passed since the last shot.
+     */
+    private float timeSinceLastShot = 0f;
 
     /**
      * Texture to hold the Sprite map of the animated shot.
@@ -55,12 +66,15 @@ public class ShotManager
 
             // Add new shot to list of current shots.
             shots.add(newShotAnimated);
+
+            // Reset time since last shot.
+            timeSinceLastShot = 0f;
         }
     }
 
     /**
      * Loop through List of shots, and draw each.
-     * @param batch
+     * @param batch reference to the game's SpriteBatch instance.
      */
     public void draw(SpriteBatch batch)
     {
@@ -74,9 +88,11 @@ public class ShotManager
      */
     public void update()
     {
-         for (AnimatedSprite shot : shots) {
-             shot.move();
-         }
+        for (AnimatedSprite shot : shots) {
+            shot.move();
+        }
+
+        timeSinceLastShot += Gdx.graphics.getDeltaTime();
     }
 
     /**
@@ -85,6 +101,6 @@ public class ShotManager
      */
     private boolean canFireShot()
     {
-        return true; // Mocking this for now, will add logic / handling / throttling later.
+        return timeSinceLastShot > MINIMUM_TIME_BETWEEN_SHOTS;
     }
 }
