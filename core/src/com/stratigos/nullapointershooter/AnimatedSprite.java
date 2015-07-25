@@ -12,8 +12,8 @@ import com.badlogic.gdx.math.Vector2;
  * Class to handle drawing / animating sprites.
  * Created by stratigos on 7/20/15 (via Pluralsight Android Game App Dev course).
  */
-public class AnimatedSprite {
-
+public class AnimatedSprite
+{
     /**
      * Rate of movement, in pixels, the Sprite moves per game tick.
      */
