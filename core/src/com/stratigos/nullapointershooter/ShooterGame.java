@@ -129,7 +129,6 @@ public class ShooterGame extends ApplicationAdapter
 	private void handleInput()
 	{
 		if (Gdx.input.isTouched()) {
-
 			// Using a 3D vector (though ignoring the Z parameter) to store touch coordinates.
 			Vector3 touchPosition = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
 			// Storing touch position. This alleviates issue where ship starts moving in opposite direction if touched

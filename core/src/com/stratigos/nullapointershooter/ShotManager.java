@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -84,12 +85,21 @@ public class ShotManager
     }
 
     /**
-     * Moves each Sprite (shot) in the list.
+     * Moves each Sprite (shot) in the list. If shots move beyond the screen height, they are removed from the list
+     *  of active shots.
      */
     public void update()
     {
-        for (AnimatedSprite shot : shots) {
+        Iterator<AnimatedSprite> i = shots.iterator();
+
+        while (i.hasNext()) {
+            AnimatedSprite shot = i.next();
             shot.move();
+
+            // Remove shot if it went off the screen.
+            if (shot.getY() > ShooterGame.SCREEN_HEIGHT) {
+                i.remove();
+            }
         }
 
         timeSinceLastShot += Gdx.graphics.getDeltaTime();

@@ -167,6 +167,14 @@ public class AnimatedSprite
     }
 
     /**
+     * Get the Y position of the Sprite.
+     * @return Pixel y-position of the Sprite.
+     */
+    public int getY() {
+        return (int) (sprite.getY());
+    }
+
+    /**
      * Find the distance between the edge of the Sprite and it's center.
      * @return Distance in pixels from Sprite center pixel.
      */
