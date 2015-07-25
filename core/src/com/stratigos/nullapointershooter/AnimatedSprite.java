@@ -134,18 +134,19 @@ public class AnimatedSprite
     }
 
     /**
-     * Moves the ship to the left or right based on current velocity. Prevents Sprite from moving off the screen.
+     * Moves the Sprite to the left or right, or up, based on current velocity. Prevents Sprite from moving off the
+     *  screen for X axis movement.
      */
     public void move()
     {
-        // Determine how many pixels the ship should move in the X axis based on time passed.
+        // Determine how many pixels the Sprite should move based on time passed.
         int xMovement = (int) (velocity.x * Gdx.graphics.getDeltaTime());
+        int yMovement = (int) (velocity.y * Gdx.graphics.getDeltaTime());
 
-        // Set new position of ship based on changed velocity. Note that the ship does not move forward or backward, so
-        //  the Y-position always stays at 0.
-        sprite.setPosition(sprite.getX() + xMovement, 0);
+        // Set new position of Sprite based on changed velocity.
+        sprite.setPosition(sprite.getX() + xMovement, sprite.getY() + yMovement);
 
-        // Prevent Sprite from moving off the screen.
+        // Prevent Sprite from moving off the screen along the X axis.
         if (sprite.getX() < 0) {
             sprite.setX(0);
             velocity.x = 0; // Stop moving the Sprite altogether when it hits the edge.

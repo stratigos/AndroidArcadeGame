@@ -11,8 +11,8 @@ import java.util.List;
  * Class to handle shooting of projectiles from a Sprite. Handles number of shots fired, range, animation, etc.
  * Created by stratigos on 7/25/15 (via Pluralsight Android Game App Dev course).
  */
-public class ShotManager {
-
+public class ShotManager
+{
     /**
      * Position of center of Y axis from which the Sprite's weapons begin to appear. Used to determine starting location
      *  of projectile animation.
@@ -55,6 +55,13 @@ public class ShotManager {
             // Add new shot to list of current shots.
             shots.add(newShotAnimated);
         }
+    }
+
+    public void update()
+    {
+         for (AnimatedSprite shot : shots) {
+             shot.move();
+         }
     }
 
     /**
