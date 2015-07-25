@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
 
 public class ShooterGame extends ApplicationAdapter
 {
@@ -128,13 +129,17 @@ public class ShooterGame extends ApplicationAdapter
 	private void handleInput()
 	{
 		if (Gdx.input.isTouched()) {
-			// Handle movement. The ship only moves left or right, not up or down, and has a predefined velocity, so
-			//  its only necessary to know if it was the X input was manipulated.
-			int xTouch = Gdx.input.getX();
+
+			// Using a 3D vector (though ignoring the Z parameter) to store touch coordinates.
+			Vector3 touchPosition = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+			// Storing touch position. This alleviates issue where ship starts moving in opposite direction if touched
+			//  too many times in the same direction, by setting the touch coordinates to be the same as the screen
+			//  drawing coordinates.
+			camera.unproject(touchPosition);
 
 			// If the position of the X touch input is beyond the spaceship's X position, then the ship should move
 			//  to the right. Otherwise, it should move to the left.
-			if (xTouch > spaceshipAnimated.getX()) {
+			if (touchPosition.x > spaceshipAnimated.getX()) {
 				spaceshipAnimated.moveRight();
 			} else {
 				spaceshipAnimated.moveLeft();
