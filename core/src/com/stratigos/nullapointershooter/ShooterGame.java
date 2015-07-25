@@ -43,6 +43,11 @@ public class ShooterGame extends ApplicationAdapter
      *  like a badass space fighter ship.
      */
     private AnimatedSprite spaceshipAnimated;
+
+	/**
+	 * Object which handles the shooting feature of the spaceship.
+	 */
+	private ShotManager shotManager;
 	
 	@Override
 	public void create ()
@@ -70,6 +75,9 @@ public class ShooterGame extends ApplicationAdapter
         // Create animated spaceship.
         spaceshipAnimated = new AnimatedSprite(spaceshipSprite);
         spaceshipAnimated.setPosition((SCREEN_WIDTH / 2), 0);
+
+		// Create ShotManager instance to track/animate shooting.
+		shotManager = new ShotManager();
 	}
 
 	@Override
