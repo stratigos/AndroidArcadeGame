@@ -145,8 +145,6 @@ public class AnimatedSprite {
             sprite.setX(ShooterGame.SCREEN_WIDTH - getSpriteWidth());
             velocity.x = 0;
         }
-
-
     }
 
     /**
@@ -154,7 +152,6 @@ public class AnimatedSprite {
      * @return Pixel x-position of center of the Sprite.
      */
     public int getX() {
-
         return (int) (sprite.getX() + getSpriteCenterOffset());
     }
 
