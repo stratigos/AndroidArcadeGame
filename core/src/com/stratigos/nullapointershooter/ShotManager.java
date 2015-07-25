@@ -2,6 +2,7 @@ package com.stratigos.nullapointershooter;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class ShotManager
      * Position of center of Y axis from which the Sprite's weapons begin to appear. Used to determine starting location
      *  of projectile animation.
      */
-    public static final int SHOT_Y_OFFSET = 6;
+    public static final int SHOT_Y_OFFSET = 110;
 
     /**
      * Value to store the velocity of the projectile.
@@ -32,7 +33,7 @@ public class ShotManager
     /**
      * List of currently active shots / projectiles from the ship.
      */
-    private List<AnimatedSprite> shots = new ArrayList<AnimatedSprite>;
+    private List<AnimatedSprite> shots = new ArrayList<AnimatedSprite>();
 
     public ShotManager(Texture shotTexture)
     {
@@ -57,6 +58,20 @@ public class ShotManager
         }
     }
 
+    /**
+     * Loop through List of shots, and draw each.
+     * @param batch
+     */
+    public void draw(SpriteBatch batch)
+    {
+        for (AnimatedSprite shot : shots) {
+            shot.draw(batch);
+        }
+    }
+
+    /**
+     * Moves each Sprite (shot) in the list.
+     */
     public void update()
     {
          for (AnimatedSprite shot : shots) {
@@ -68,9 +83,8 @@ public class ShotManager
      * Determines if Sprite is able to fire a shot or not, based on throttling criteria.
      * @return Boolean
      */
-    private boolean canFireShot() {
+    private boolean canFireShot()
+    {
         return true; // Mocking this for now, will add logic / handling / throttling later.
     }
-
-
 }
