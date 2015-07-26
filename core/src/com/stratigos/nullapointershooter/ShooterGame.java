@@ -47,6 +47,11 @@ public class ShooterGame extends ApplicationAdapter
     private AnimatedSprite spaceshipAnimated;
 
 	/**
+	 * Sprite for alien spaceships.
+	 */
+	private Enemy enemy;
+
+	/**
 	 * Object which handles the shooting feature of the spaceship.
 	 */
 	private ShotManager shotManager;
@@ -82,6 +87,10 @@ public class ShooterGame extends ApplicationAdapter
         // Create animated spaceship.
         spaceshipAnimated = new AnimatedSprite(spaceshipSprite);
         spaceshipAnimated.setPosition((SCREEN_WIDTH / 2), 0);
+
+		// Create alien spaceship.
+		Texture enemyTexture = new Texture(Gdx.files.internal("alienshipspritemap.png"));
+		enemy                = new Enemy(enemyTexture);
 
 		// Create Texture to display shots, and ShotManager instance to track/animate shooting.
 		Texture shotTexture = new Texture(Gdx.files.internal("shotspritemap.png"));
