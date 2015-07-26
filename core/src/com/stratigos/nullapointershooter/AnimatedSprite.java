@@ -175,6 +175,23 @@ public class AnimatedSprite
     }
 
     /**
+     * Get the width of an individual frame of the animated Sprite, cast as an integer.
+     * @return width
+     */
+    public int getWidth()
+    {
+        return (int) (getSpriteWidth());
+    }
+
+    /**
+     * Get the height of an individual frame of the animated Sprite, cast as an integer.
+     * @return height
+     */
+    public int getHeight() {
+        return (int) (sprite.getHeight() / FRAMES_ROW);
+    }
+
+    /**
      * Find the distance between the edge of the Sprite and it's center.
      * @return Distance in pixels from Sprite center pixel.
      */
