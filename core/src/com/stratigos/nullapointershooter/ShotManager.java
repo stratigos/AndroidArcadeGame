@@ -180,11 +180,12 @@ public class ShotManager
     public boolean playerShotTouches(Rectangle boundingBox)
     {
         Iterator<AnimatedSprite> i = shots.iterator();
+        Rectangle intersection     = new Rectangle;
 
         // Check all player shots to see if they collide with the Rectangle.
         while (i.hasNext()) {
             AnimatedSprite shot = i.next();
-            if (Intersector.intersectRectangles(shot.getBoundingBox(), boundingBox)) {
+            if (Intersector.intersectRectangles(shot.getBoundingBox(), boundingBox, intersection)) {
                 i.remove();
                 return true;
             }
