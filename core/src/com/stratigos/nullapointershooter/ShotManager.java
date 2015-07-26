@@ -18,10 +18,15 @@ import java.util.List;
 public class ShotManager
 {
     /**
-     * Position of center of Y axis from which the Sprite's weapons begin to appear. Used to determine starting location
+     * Position of center of Y-axis from which the Sprite's weapons begin to appear. Used to determine starting location
      *  of projectile animation.
      */
     private static final int SHOT_Y_OFFSET = 110;
+
+    /**
+     * Position of center of Y-axis for the alien Sprite.
+     */
+    public static final float ENEMY_SHOT_Y_OFFSET = 400;
 
     /**
      * Value to store the velocity of the projectile.
@@ -49,37 +54,23 @@ public class ShotManager
     private List<AnimatedSprite> shots = new ArrayList<AnimatedSprite>();
 
     /**
+     * List of currently active enemy shots.
+     */
+    private List<AnimatedSprite> enemyShots = new ArrayList<AnimatedSprite>();
+
+    /**
      * Audio effect for firing a shot.
      */
     private Sound laser = Gdx.audio.newSound(Gdx.files.internal("shoot.wav"));
 
+    /**
+     * Audnio effect for Enemy firing a shot,
+     */
+    private Sound plasma = Gdx.audio.newSound(Gdx.files.internal("alienshot.mp3"));
+
     public ShotManager(Texture shotTexture)
     {
         this.shotTexture = shotTexture;
-    }
-
-    /**
-     * Fires projectiles from Sprite, handling animation of the projectile / weapon.
-     * @param shipCenterXLocation The center of the Sprite with a weapon.
-     */
-    public void firePlayerShot(int shipCenterXLocation)
-    {
-        if (canFireShot()) {
-            Sprite newShot                 = new Sprite(shotTexture);
-            AnimatedSprite newShotAnimated = new AnimatedSprite(newShot);
-
-            newShotAnimated.setPosition(shipCenterXLocation, SHOT_Y_OFFSET);
-            newShotAnimated.setVelocity(new Vector2(0, SHOT_SPEED)); // Shot only moves on the Y axis, so X is zero.
-
-            // Add new shot to list of current shots.
-            shots.add(newShotAnimated);
-
-            // Reset time since last shot.
-            timeSinceLastShot = 0f;
-
-            // Play audio for shot.
-            laser.play();
-        }
     }
 
     /**
@@ -114,13 +105,47 @@ public class ShotManager
         timeSinceLastShot += Gdx.graphics.getDeltaTime();
     }
 
+    /**
+     * Fires projectiles from Sprite, handling animation of the projectile / weapon.
+     * @param shipCenterXLocation The center of the Sprite with a weapon.
+     */
+    public void firePlayerShot(int shipCenterXLocation)
+    {
+        if (canFireShot()) {
+            Sprite newShot                 = new Sprite(shotTexture);
+            AnimatedSprite newShotAnimated = new AnimatedSprite(newShot);
+
+            newShotAnimated.setPosition(shipCenterXLocation, SHOT_Y_OFFSET);
+            newShotAnimated.setVelocity(new Vector2(0, SHOT_SPEED)); // Shot only moves on the Y axis, so X is zero.
+
+            // Add new shot to list of current shots.
+            shots.add(newShotAnimated);
+
+            // Reset time since last shot.
+            timeSinceLastShot = 0f;
+
+            // Play audio for shot.
+            laser.play();
+        }
+    }
 
     /**
-     * Handler for the AI to fire projectiles;
-     * @param x Location of center of AI Sprite.
+     * Handler for the AI to fire projectiles. Assumes Enemy class handles logic for deciding if shot is appropriate.
+     * @param alienCenterXLocation Location of center of AI Sprite.
      */
-    public void fireEnemyShot(int x)
+    public void fireEnemyShot(int alienCenterXLocation)
     {
+        Sprite newShot                 = new Sprite(shotTexture);
+        AnimatedSprite newShotAnimated = new AnimatedSprite(newShot);
+
+        newShotAnimated.setPosition(alienCenterXLocation, ENEMY_SHOT_Y_OFFSET);
+        newShotAnimated.setVelocity(new Vector2(0, -SHOT_SPEED)); // Shoot opposite direction from player.
+
+        // Add new shot to list of current shots.
+        enemyShots.add(newShotAnimated);
+
+        // Play audio for enemy shot.
+        plasma.play();
     }
 
     /**
