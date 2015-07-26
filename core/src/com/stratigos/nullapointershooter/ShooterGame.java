@@ -2,6 +2,7 @@ package com.stratigos.nullapointershooter;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -49,6 +50,11 @@ public class ShooterGame extends ApplicationAdapter
 	 * Object which handles the shooting feature of the spaceship.
 	 */
 	private ShotManager shotManager;
+
+	/**
+	 * Object which handles game background music.
+	 */
+	private Music gameMusic;
 	
 	@Override
 	public void create ()
@@ -80,6 +86,12 @@ public class ShooterGame extends ApplicationAdapter
 		// Create Texture to display shots, and ShotManager instance to track/animate shooting.
 		Texture shotTexture = new Texture(Gdx.files.internal("shotspritemap.png"));
 		shotManager 		= new ShotManager(shotTexture);
+
+		// Play groovy game music.
+		gameMusic = Gdx.audio.newMusic(Gdx.files.internal("ambient.flac"));
+		gameMusic.setVolume(0.25f); // Low volume.
+		gameMusic.setLooping(true);
+		gameMusic.play();
 	}
 
 	@Override
