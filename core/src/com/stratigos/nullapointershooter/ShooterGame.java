@@ -127,7 +127,7 @@ public class ShooterGame extends ApplicationAdapter
         // Draw spaceship Sprite.
         spaceshipAnimated.draw(batch);
 
-		// Draw the alien spaceship. 
+		// Draw the alien spaceship.
 		enemy.draw(batch);
 
         // Draw the spaceship's projectiles / shots.
@@ -141,6 +141,9 @@ public class ShooterGame extends ApplicationAdapter
 
         // Animate spaceship movement.
         spaceshipAnimated.move();
+
+        // Animate alien spaceship movement.
+        enemy.update();
 
         // Animate projectiles / shots movement.
         shotManager.update();

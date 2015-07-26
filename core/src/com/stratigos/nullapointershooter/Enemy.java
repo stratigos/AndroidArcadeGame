@@ -3,6 +3,7 @@ package com.stratigos.nullapointershooter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 
 import java.util.Random;
 
@@ -12,6 +13,11 @@ import java.util.Random;
  */
 public class Enemy
 {
+    /**
+     * Velocity of alien spaceship on screen.
+     */
+    public static final float ENEMY_SPEED = 250;
+
     /**
      * Texture to hold spritemap for the alien ship.
      */
@@ -41,6 +47,14 @@ public class Enemy
         int xPosition      = createRandomPosition();
 
         animatedSprite.setPosition(xPosition, (ShooterGame.SCREEN_HEIGHT - animatedSprite.getHeight()));
+        animatedSprite.setVelocity(new Vector2(ENEMY_SPEED, 0));
+    }
+
+    /**
+     * Move the alien ship.
+     */
+    public void update() {
+        animatedSprite.move();
     }
 
     /**
