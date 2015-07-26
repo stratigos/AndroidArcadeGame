@@ -23,6 +23,9 @@ public class Enemy
      */
     private final Texture enemyTexture;
 
+    /**
+     * Sprite of the alien ship. 
+     */
     private AnimatedSprite animatedSprite;
 
     public Enemy(Texture enemyTexture)
@@ -40,6 +43,16 @@ public class Enemy
         animatedSprite.draw(batch);
     }
 
+    /**
+     * Move the alien ship.
+     */
+    public void update() {
+        animatedSprite.move();
+    }
+
+    /**
+     * Instance a Sprite and set its position and velocity on the screen.
+     */
     private void spawn()
     {
         Sprite enemySprite = new Sprite(enemyTexture);
@@ -48,13 +61,6 @@ public class Enemy
 
         animatedSprite.setPosition(xPosition, (ShooterGame.SCREEN_HEIGHT - animatedSprite.getHeight()));
         animatedSprite.setVelocity(new Vector2(ENEMY_SPEED, 0));
-    }
-
-    /**
-     * Move the alien ship.
-     */
-    public void update() {
-        animatedSprite.move();
     }
 
     /**
