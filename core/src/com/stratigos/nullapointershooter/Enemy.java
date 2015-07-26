@@ -24,7 +24,7 @@ public class Enemy
     private final Texture enemyTexture;
 
     /**
-     * Sprite of the alien ship. 
+     * Sprite of the alien ship.
      */
     private AnimatedSprite animatedSprite;
 
@@ -47,6 +47,9 @@ public class Enemy
      * Move the alien ship.
      */
     public void update() {
+        if (shouldChangeDirection()) {
+            animatedSprite.changeDirection();
+        }
         animatedSprite.move();
     }
 
@@ -75,5 +78,15 @@ public class Enemy
         int randomNumber = random.nextInt((ShooterGame.SCREEN_WIDTH - animatedSprite.getWidth()) + 1);
 
         return randomNumber + (animatedSprite.getWidth() / 2);
+    }
+
+    /**
+     * Determines if alien ship should change direction from left to right, or right to left.
+     * @return TRUE if direction should change.
+     */
+    private boolean shouldChangeDirection()
+    {
+        Random random = new Random();
+        return random.nextInt(41) == 0;
     }
 }

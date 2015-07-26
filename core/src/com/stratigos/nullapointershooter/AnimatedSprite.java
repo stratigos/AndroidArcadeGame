@@ -149,12 +149,18 @@ public class AnimatedSprite
         // Prevent Sprite from moving off the screen along the X axis.
         if (sprite.getX() < 0) {
             sprite.setX(0);
-            velocity.x = 0; // Stop moving the Sprite altogether when it hits the edge.
         }
         if ((sprite.getX() + getSpriteWidth()) > ShooterGame.SCREEN_WIDTH) {
             sprite.setX(ShooterGame.SCREEN_WIDTH - getSpriteWidth());
-            velocity.x = 0;
         }
+    }
+
+    /**
+     * Invert the Sprite's velocity (swap left or right movement).
+     */
+    public void changeDirection()
+    {
+        velocity.x = -velocity.x;
     }
 
     /**
@@ -170,7 +176,8 @@ public class AnimatedSprite
      * Get the Y position of the Sprite.
      * @return Pixel y-position of the Sprite.
      */
-    public int getY() {
+    public int getY()
+    {
         return (int) (sprite.getY());
     }
 
@@ -187,7 +194,8 @@ public class AnimatedSprite
      * Get the height of an individual frame of the animated Sprite, cast as an integer.
      * @return height
      */
-    public int getHeight() {
+    public int getHeight()
+    {
         return (int) (sprite.getHeight() / FRAMES_ROW);
     }
 
