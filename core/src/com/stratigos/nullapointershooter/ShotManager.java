@@ -1,6 +1,7 @@
 package com.stratigos.nullapointershooter;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -47,6 +48,11 @@ public class ShotManager
      */
     private List<AnimatedSprite> shots = new ArrayList<AnimatedSprite>();
 
+    /**
+     * Audio effect for firing a shot.
+     */
+    private Sound laser = Gdx.audio.newSound(Gdx.files.internal("shoot.wav"));
+
     public ShotManager(Texture shotTexture)
     {
         this.shotTexture = shotTexture;
@@ -70,6 +76,9 @@ public class ShotManager
 
             // Reset time since last shot.
             timeSinceLastShot = 0f;
+
+            // Play audio for shot.
+            laser.play();
         }
     }
 
