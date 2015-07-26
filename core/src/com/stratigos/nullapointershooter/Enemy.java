@@ -24,13 +24,19 @@ public class Enemy
     private final Texture enemyTexture;
 
     /**
+     * Main game loop's ShotManager instance.
+     */
+    private final ShotManager shotManager;
+
+    /**
      * Sprite of the alien ship.
      */
     private AnimatedSprite animatedSprite;
 
-    public Enemy(Texture enemyTexture)
+    public Enemy(Texture enemyTexture, ShotManager shotManager)
     {
         this.enemyTexture = enemyTexture;
+        this.shotManager  = shotManager;
 
         spawn();
     }
@@ -39,16 +45,21 @@ public class Enemy
      * Draw the alien Sprite on the screen.
      * @param batch Main game loop SpriteBatch
      */
-    public void draw(SpriteBatch batch) {
+    public void draw(SpriteBatch batch)
+    {
         animatedSprite.draw(batch);
     }
 
     /**
-     * Move the alien ship.
+     * Move the alien ship, and fire a shot.
      */
-    public void update() {
+    public void update()
+    {
         if (shouldChangeDirection()) {
             animatedSprite.changeDirection();
+        }
+        if (shouldShoot()) {
+            shotManager.fireEnemyShot(animatedSprite.getX());
         }
         animatedSprite.move();
     }
@@ -88,5 +99,15 @@ public class Enemy
     {
         Random random = new Random();
         return random.nextInt(41) == 0;
+    }
+
+    /**
+     *
+     * @return TRUE if weapon should be shot.
+     */
+    private boolean shouldShoot()
+    {
+        Random random = new Random();
+        return random.nextInt(61) == 0;
     }
 }

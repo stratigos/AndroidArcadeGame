@@ -114,6 +114,15 @@ public class ShotManager
         timeSinceLastShot += Gdx.graphics.getDeltaTime();
     }
 
+
+    /**
+     * Handler for the AI to fire projectiles;
+     * @param x Location of center of AI Sprite.
+     */
+    public void fireEnemyShot(int x)
+    {
+    }
+
     /**
      * Determines if Sprite is able to fire a shot or not, based on throttling criteria.
      * @return Boolean

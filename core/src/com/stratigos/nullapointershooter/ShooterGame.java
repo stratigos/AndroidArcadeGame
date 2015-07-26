@@ -80,6 +80,10 @@ public class ShooterGame extends ApplicationAdapter
         // Create background.
         background = new Texture(Gdx.files.internal("spacebackground.png"));
 
+        // Create Texture to display shots, and ShotManager instance to track/animate shooting.
+        Texture shotTexture = new Texture(Gdx.files.internal("shotspritemap.png"));
+        shotManager 		= new ShotManager(shotTexture);
+
         // Create the spaceship.
         Texture spaceshipTexture = new Texture(Gdx.files.internal("spaceshipspritemap.png"));
         spaceshipSprite          = new Sprite(spaceshipTexture);
@@ -90,11 +94,7 @@ public class ShooterGame extends ApplicationAdapter
 
         // Create alien spaceship.
         Texture enemyTexture = new Texture(Gdx.files.internal("alienshipspritemap.png"));
-        enemy                = new Enemy(enemyTexture);
-
-        // Create Texture to display shots, and ShotManager instance to track/animate shooting.
-        Texture shotTexture = new Texture(Gdx.files.internal("shotspritemap.png"));
-        shotManager 		= new ShotManager(shotTexture);
+        enemy                = new Enemy(enemyTexture, shotManager);
 
         // Play groovy game music.
         gameMusic = Gdx.audio.newMusic(Gdx.files.internal("ambient.flac"));
