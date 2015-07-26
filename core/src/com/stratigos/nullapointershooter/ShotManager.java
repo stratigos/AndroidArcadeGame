@@ -49,6 +49,11 @@ public class ShotManager
     private final Texture shotTexture;
 
     /**
+     * Texture to hold the Sprite map of the Enemy animated shot.
+     */
+    private final Texture enemyShotTexture;
+
+    /**
      * List of currently active shots / projectiles from the ship.
      */
     private List<AnimatedSprite> shots = new ArrayList<AnimatedSprite>();
@@ -68,9 +73,10 @@ public class ShotManager
      */
     private Sound plasma = Gdx.audio.newSound(Gdx.files.internal("alienshot.mp3"));
 
-    public ShotManager(Texture shotTexture)
+    public ShotManager(Texture shotTexture, Texture enemyShotTexture)
     {
-        this.shotTexture = shotTexture;
+        this.shotTexture      = shotTexture;
+        this.enemyShotTexture = enemyShotTexture;
     }
 
     /**
@@ -82,7 +88,6 @@ public class ShotManager
         for (AnimatedSprite shot : shots) {
             shot.draw(batch);
         }
-
         for (AnimatedSprite shot : enemyShots) {
             shot.draw(batch);
         }
@@ -97,6 +102,7 @@ public class ShotManager
         Iterator<AnimatedSprite> i = shots.iterator();
         Iterator<AnimatedSprite> j = enemyShots.iterator();
 
+        // Animate player Sprite shots.
         while (i.hasNext()) {
             AnimatedSprite shot = i.next();
             shot.move();
@@ -107,6 +113,7 @@ public class ShotManager
             }
         }
 
+        // Animate Enemy Sprite shots.
         while (j.hasNext()) {
             AnimatedSprite enemyShot = j.next();
             enemyShot.move();
@@ -150,7 +157,7 @@ public class ShotManager
      */
     public void fireEnemyShot(int alienCenterXLocation)
     {
-        Sprite newShot                 = new Sprite(shotTexture);
+        Sprite newShot                 = new Sprite(enemyShotTexture);
         AnimatedSprite newShotAnimated = new AnimatedSprite(newShot);
 
         newShotAnimated.setPosition(alienCenterXLocation, ENEMY_SHOT_Y_OFFSET);

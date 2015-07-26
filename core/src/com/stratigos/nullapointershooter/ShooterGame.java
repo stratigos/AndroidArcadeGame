@@ -81,8 +81,9 @@ public class ShooterGame extends ApplicationAdapter
         background = new Texture(Gdx.files.internal("spacebackground.png"));
 
         // Create Texture to display shots, and ShotManager instance to track/animate shooting.
-        Texture shotTexture = new Texture(Gdx.files.internal("shotspritemap.png"));
-        shotManager 		= new ShotManager(shotTexture);
+        Texture shotTexture      = new Texture(Gdx.files.internal("shotspritemap.png"));
+        Texture enemyShotTexture = new Texture(Gdx.files.internal("alienshotspritemap.png"));
+        shotManager 		     = new ShotManager(shotTexture, enemyShotTexture);
 
         // Create the spaceship.
         Texture spaceshipTexture = new Texture(Gdx.files.internal("spaceshipspritemap.png"));
