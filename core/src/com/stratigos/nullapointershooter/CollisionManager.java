@@ -27,4 +27,26 @@ public class CollisionManager
         this.enemy             = enemy;
         this.shotManager       = shotManager;
     }
+
+    /**
+     * Check to see if player or alien shot each other.
+     */
+    public void handleCollisions()
+    {
+        // Check if player shot enemy.
+        handleEnemyWasShot();
+
+        // check if enemy shot player
+    }
+
+    /**
+     * Check if player shot alien, and if so, keel 'um.
+     */
+    private void handleEnemyWasShot()
+    {
+        // Check shotManager to see if any boundaries are crossing.
+        if (shotManager.playerShotTouches(enemy.getBoundingBox())) {
+            enemy.hit();
+        }
+    }
 }

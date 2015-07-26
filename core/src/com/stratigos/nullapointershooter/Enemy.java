@@ -3,6 +3,7 @@ package com.stratigos.nullapointershooter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.Random;
@@ -62,6 +63,15 @@ public class Enemy
             shotManager.fireEnemyShot(animatedSprite.getX());
         }
         animatedSprite.move();
+    }
+
+    /**
+     * Defines collision border.
+     * @return a Rectangle instance which defines the border of the Sprite.
+     */
+    public Rectangle getBoundingBox()
+    {
+        return animatedSprite.getBoundingBox();
     }
 
     /**

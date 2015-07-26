@@ -5,6 +5,8 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
@@ -168,6 +170,27 @@ public class ShotManager
 
         // Play audio for enemy shot.
         plasma.play();
+    }
+
+    /**
+     * Check if any player shots are within a bounding box / Rectangle.
+     * @param boundingBox The area in which to detect a collision. Typically the bounding box of the Enemy ship.
+     * @return TRUE if player shot is within Rectangle.
+     */
+    public boolean playerShotTouches(Rectangle boundingBox)
+    {
+        Iterator<AnimatedSprite> i = shots.iterator();
+
+        // Check all player shots to see if they collide with the Rectangle.
+        while (i.hasNext()) {
+            AnimatedSprite shot = i.next();
+            if (Intersector.intersectRectangles(shot.getBoundingBox(), boundingBox)) {
+                i.remove();
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

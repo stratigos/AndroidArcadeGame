@@ -156,6 +156,9 @@ public class ShooterGame extends ApplicationAdapter
 
         // Animate projectiles / shots movement.
         shotManager.update();
+
+        // Check for collisions.
+        collisionManager.handleCollisions();
     }
 
     /**
