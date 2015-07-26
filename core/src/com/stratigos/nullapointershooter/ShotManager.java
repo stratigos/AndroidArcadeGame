@@ -82,6 +82,10 @@ public class ShotManager
         for (AnimatedSprite shot : shots) {
             shot.draw(batch);
         }
+
+        for (AnimatedSprite shot : enemyShots) {
+            shot.draw(batch);
+        }
     }
 
     /**
@@ -91,6 +95,7 @@ public class ShotManager
     public void update()
     {
         Iterator<AnimatedSprite> i = shots.iterator();
+        Iterator<AnimatedSprite> j = enemyShots.iterator();
 
         while (i.hasNext()) {
             AnimatedSprite shot = i.next();
@@ -99,6 +104,16 @@ public class ShotManager
             // Remove shot if it went off the screen.
             if (shot.getY() > ShooterGame.SCREEN_HEIGHT) {
                 i.remove();
+            }
+        }
+
+        while (j.hasNext()) {
+            AnimatedSprite enemyShot = j.next();
+            enemyShot.move();
+
+            // Remove shot if it went off the screen (0 is the bottom).
+            if (enemyShot.getY() < 0) {
+                j.remove();
             }
         }
 
