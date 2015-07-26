@@ -57,6 +57,11 @@ public class ShooterGame extends ApplicationAdapter
     private ShotManager shotManager;
 
     /**
+     * Object which handles collision detection.
+     */
+    private CollisionManager collisionManager;
+
+    /**
      * Object which handles game background music.
      */
     private Music gameMusic;
@@ -96,6 +101,9 @@ public class ShooterGame extends ApplicationAdapter
         // Create alien spaceship.
         Texture enemyTexture = new Texture(Gdx.files.internal("alienshipspritemap.png"));
         enemy                = new Enemy(enemyTexture, shotManager);
+
+        // Create collision detection handler.
+        collisionManager = new CollisionManager(spaceshipAnimated, enemy, shotManager);
 
         // Play groovy game music.
         gameMusic = Gdx.audio.newMusic(Gdx.files.internal("ambient.flac"));
