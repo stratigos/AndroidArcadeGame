@@ -33,10 +33,8 @@ public class CollisionManager
      */
     public void handleCollisions()
     {
-        // Check if player shot enemy.
         handleEnemyWasShot();
-
-        // check if enemy shot player
+        handlePlayerWasShot();
     }
 
     /**
@@ -47,6 +45,17 @@ public class CollisionManager
         // Check shotManager to see if any boundaries are crossing.
         if (shotManager.playerShotTouches(enemy.getBoundingBox())) {
             enemy.hit();
+        }
+    }
+
+    /**
+     * Check if alien shot player, and if so, get 'em outta here!
+     */
+    private void handlePlayerWasShot()
+    {
+        // Check shotManager to see if any boundaries are crossing.
+        if (shotManager.enemyShotTouches(spaceshipAnimated.getBoundingBox())) {
+            spaceshipAnimated.setDead(true);
         }
     }
 }

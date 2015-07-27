@@ -179,7 +179,36 @@ public class ShotManager
      */
     public boolean playerShotTouches(Rectangle boundingBox)
     {
-        Iterator<AnimatedSprite> i = shots.iterator();
+        return shotTouches(shots, boundingBox);
+    }
+
+    /**
+     * Check if any enemy shots are within a bounding box / Rectangle.
+     * @param boundingBox The area in which to detect a collision. Typically the bounding box of the player.
+     * @return TRUE if enemy shot is within Rectangle.
+     */
+    public boolean enemyShotTouches(Rectangle boundingBox)
+    {
+        return shotTouches(enemyShots, boundingBox);
+    }
+
+    /**
+     * Determines if Sprite is able to fire a shot or not, based on throttling criteria.
+     * @return Boolean
+     */
+    private boolean canFireShot()
+    {
+        return timeSinceLastShot > MINIMUM_TIME_BETWEEN_SHOTS;
+    }
+
+    /**
+     * Check if any items in a list of shots are within a bounding Rectangle.
+     * @param theShots List of shots.
+     * @return TRUE if collision is detected.
+     */
+    private boolean shotTouches(List<AnimatedSprite> theShots, Rectangle boundingBox)
+    {
+        Iterator<AnimatedSprite> i = theShots.iterator();
         Rectangle intersection     = new Rectangle(0, 0, 0, 0);
 
         // Check all player shots to see if they collide with the Rectangle.
@@ -192,14 +221,5 @@ public class ShotManager
         }
 
         return false;
-    }
-
-    /**
-     * Determines if Sprite is able to fire a shot or not, based on throttling criteria.
-     * @return Boolean
-     */
-    private boolean canFireShot()
-    {
-        return timeSinceLastShot > MINIMUM_TIME_BETWEEN_SHOTS;
     }
 }
