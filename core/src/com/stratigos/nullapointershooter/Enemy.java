@@ -1,5 +1,6 @@
 package com.stratigos.nullapointershooter;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -34,6 +35,11 @@ public class Enemy
      */
     private AnimatedSprite animatedSprite;
 
+    /**
+     * Prevent Sprite from respawning for a specified interval.
+     */
+    private float spawnTimeout = 0f;
+
     public Enemy(Texture enemyTexture, ShotManager shotManager)
     {
         this.enemyTexture = enemyTexture;
@@ -48,21 +54,33 @@ public class Enemy
      */
     public void draw(SpriteBatch batch)
     {
-        animatedSprite.draw(batch);
+        if (!animatedSprite.isDead()) {
+            animatedSprite.draw(batch);
+        }
     }
 
     /**
-     * Move the alien ship, and fire a shot.
+     * Move the alien ship, and fire a shot, if the Sprite is alive. If its dead, wait for respawn.
      */
     public void update()
     {
-        if (shouldChangeDirection()) {
-            animatedSprite.changeDirection();
+        if (animatedSprite.isDead()) {
+            // Reduce timeout timer for respawn on each update() When this.spawnTimeout hits 0, respawn.
+            spawnTimeout -= Gdx.graphics.getDeltaTime();
+            if (spawnTimeout <= 0) {
+                spawn();
+            }
+        } else {
+            // Perform "classic AI" logic, then animate the Sprite.
+            if (shouldChangeDirection()) {
+                animatedSprite.changeDirection();
+            }
+            if (shouldShoot()) {
+                shotManager.fireEnemyShot(animatedSprite.getX());
+            }
+
+            animatedSprite.move();
         }
-        if (shouldShoot()) {
-            shotManager.fireEnemyShot(animatedSprite.getX());
-        }
-        animatedSprite.move();
     }
 
     /**
@@ -72,6 +90,15 @@ public class Enemy
     public Rectangle getBoundingBox()
     {
         return animatedSprite.getBoundingBox();
+    }
+
+    /**
+     * Die when hit.
+     */
+    public void hit()
+    {
+        animatedSprite.setDead(true);
+        spawnTimeout = 2f;
     }
 
     /**
@@ -85,6 +112,7 @@ public class Enemy
 
         animatedSprite.setPosition(xPosition, (ShooterGame.SCREEN_HEIGHT - animatedSprite.getHeight()));
         animatedSprite.setVelocity(new Vector2(ENEMY_SPEED, 0));
+        animatedSprite.setDead(false);
     }
 
     /**

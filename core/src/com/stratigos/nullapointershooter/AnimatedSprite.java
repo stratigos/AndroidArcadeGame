@@ -41,6 +41,11 @@ public class AnimatedSprite
     private Animation animation;
 
     /**
+     * Determines status of Sprite.
+     */
+    private boolean isDead = false;
+
+    /**
      * Array of frames.
      */
     private TextureRegion[] frames;
@@ -207,6 +212,24 @@ public class AnimatedSprite
     public Rectangle getBoundingBox()
     {
         return new Rectangle(sprite.getX(), sprite.getY(), getWidth(), getHeight());
+    }
+
+    /**
+     * Check if Sprite is dead or not.
+     * @return TRUE if Sprite is dead.
+     */
+    public boolean isDead()
+    {
+        return isDead;
+    }
+
+    /**
+     * Set the death property of AnimatedSprite to true, and end the animation.
+     * @param isDead Boolean to state if Sprite is dead or alive.
+     */
+    public void setDead(boolean isDead)
+    {
+        this.isDead = isDead;
     }
 
     /**
