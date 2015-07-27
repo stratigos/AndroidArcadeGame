@@ -6,6 +6,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
@@ -17,6 +18,11 @@ public class ShooterGame extends ApplicationAdapter
      */
     public static final int SCREEN_WIDTH  = 800;
     public static final int SCREEN_HEIGHT = 480;
+
+    /**
+     * State of game.
+     */
+    private boolean isGameOver = false;
 
     /**
      * A camera (viewpoint / perspective?).
@@ -133,6 +139,13 @@ public class ShooterGame extends ApplicationAdapter
         // Draw background.
         batch.draw(background, 0, 0);
 
+        // If game-over, stop drawing the spaceship, and display end of game message.
+        if (isGameOver) {
+            BitmapFont font = new BitmapFont();
+            font.getData().setScale(5f);
+            font.draw(batch, "PLAYER HIT!", 250, 250);
+        }
+
         // Draw spaceship Sprite.
         spaceshipAnimated.draw(batch);
 
@@ -148,26 +161,39 @@ public class ShooterGame extends ApplicationAdapter
         // Check for touch input.
         handleInput();
 
-        // Animate spaceship movement.
-        spaceshipAnimated.move();
+        if (!isGameOver) {
+            // Animate spaceship movement.
+            spaceshipAnimated.move();
 
-        // Animate alien spaceship movement.
-        enemy.update();
+            // Animate alien spaceship movement.
+            enemy.update();
 
-        // Animate projectiles / shots movement.
-        shotManager.update();
+            // Animate projectiles / shots movement.
+            shotManager.update();
 
-        // Check for collisions.
-        collisionManager.handleCollisions();
+            // Check for collisions.
+            collisionManager.handleCollisions();
+        }
+
+        // Check for game-over state.
+        if (spaceshipAnimated.isDead()) {
+            isGameOver = true;
+        }
     }
 
     /**
      * Check if screen is touched, and if ship should move to the left or right. Also fires ship's weapons on touch.
-     * TODO Store shaceshipAnimated.getX() in a local var, and dont call it 2x.
      */
     private void handleInput()
     {
         if (Gdx.input.isTouched()) {
+
+            // If game is over, touch the screen to restart.
+            if (isGameOver) {
+                spaceshipAnimated.setDead(false);
+                isGameOver = false;
+            }
+
             // Using a 3D vector (though ignoring the Z parameter) to store touch coordinates.
             Vector3 touchPosition = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
             // Storing touch position. This alleviates issue where ship starts moving in opposite direction if touched
