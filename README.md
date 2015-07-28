@@ -1,3 +1,5 @@
-# Android Dev Learning Materials - Creating a Game with LibGDX
+# Android Game Development - Creating a Game with LibGDX
 
-Really, not much to see here, just an easy place to save/store/retrieve learning materials...
+Java "Space Invaders" style 2D shooter game for Android 2.2.
+
+All of the incredible artwork by me. Music and sounds from https://www.freesound.org/.
