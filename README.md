@@ -1,4 +1,5 @@
-# Android Game Development - Creating a Game with LibGDX
+# Android Game Development
+## Creating a Game with LibGDX
 
 Java "Space Invaders" style 2D shooter game for Android 2.2.
 
